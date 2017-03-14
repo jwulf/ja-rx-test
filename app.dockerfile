@@ -27,3 +27,15 @@ COPY composer.json composer.lock ./
 
 RUN chown -R app:app . && \
     su app -c "composer install --no-progress --no-autoloader --no-scripts && composer clear-cache"
+
+# Install the application
+
+COPY . .
+
+RUN chown -R app:app .
+
+RUN su app -c "composer install --no-progress"
+
+# Update permissions for serving
+
+RUN chown -R www-data:www-data storage bootstrap/cache
