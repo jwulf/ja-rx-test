@@ -4,9 +4,8 @@ services:
         build:
             context: ./
             dockerfile: app.dockerfile
+        image: jessarcher/movies
         working_dir: /var/www
-        volumes:
-            - ./:/var/www
         environment:
             DB_HOST: db
             DB_USERNAME: movies
@@ -27,11 +26,15 @@ services:
             context: ./
             dockerfile: web.dockerfile
         working_dir: /var/www
-        volumes:
-            - ./:/var/www
         ports:
             - 8080:80
         depends_on:
+            - app
+    migrate:
+        image: jessarcher/movies
+        command: php artisan migrate
+        depends_on:
+            - db
             - app
 volumes:
     db-data:
