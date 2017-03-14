@@ -1,6 +1,6 @@
 # Movie API
 
-A simple API app for managing movies, genres, and actors.
+A simple Laravel API app for managing movies, genres, and actors.
 
 ## Requirements
 
