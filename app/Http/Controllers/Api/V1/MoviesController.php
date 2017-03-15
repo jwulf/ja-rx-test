@@ -26,6 +26,12 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name'        => 'required|string',
+            'rating'      => 'integer|nullable',
+            'description' => 'string|nullable',
+        ]);
+
         $movie = Movie::create($request->all());
 
         return response()->json($movie, 201);

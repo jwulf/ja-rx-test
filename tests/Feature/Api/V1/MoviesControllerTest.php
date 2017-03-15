@@ -70,4 +70,15 @@ class MoviesControllerTest extends TestCase
             ['name' => $movie->name]
         );
     }
+
+    /**
+     * Test it prevents creation of a movie with no name
+     *
+     * @return void
+     */
+    public function testItPreventsCreationOfAMovieWithNoName()
+    {
+        $response = $this->json('POST', '/api/movies', ['name' => ''])
+            ->assertStatus(422);
+    }
 }
