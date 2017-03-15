@@ -16,4 +16,14 @@ class Movie extends Model
         'rating',
         'description'
     ];
+
+    /**
+     * The actors associated with this movie
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function actors()
+    {
+        return $this->belongsToMany('App\Actor');
+    }
 }
