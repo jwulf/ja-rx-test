@@ -229,3 +229,93 @@ Resources related to actors.
 ### Delete an Actor [DELETE]
 
 + Response 204
+
+# Group Genres
+
+Resources related to genres.
+
+## Genres Collection [/api/genres]
+
+### List All Genres [GET]
+
++ Response 200 (application/json)
+
+    [
+        {
+            "id": 1,
+            "url": "/api/genre/1",
+            "name": "Action",
+        }
+    ]
+
+### Create a New Genre [POST]
+
++ name (string) - The name of the genre
+
++ Request (application/json)
+
+    {
+        "name": "Comedy",
+    }
+
++ Response 201 (application/json)
+
+    {
+        "id": 2,
+        "url": "/api/genres/2",
+        "name": "Comedy",
+    }
+
++ Response 422 (application/json)
+
+    {
+        "name": [
+            "The name field is required"
+        ]
+    }
+
+## Genre [/api/genre/{genre_id}]
+
++ Parameters
+    + genre_id (number) - ID of the Genre in the form of an integer
+
+### View a Genre [GET]
+
++ Response 200 (application/json)
+
+    {
+        "id": 2,
+        "url": "/api/genres/2",
+        "name": "Comedy",
+    }
+
+### Update a Genre [PUT]
+
++ name (string) - The name of the genre
+
++ Request (application/json)
+
+    {
+        "name": "Thriller",
+    }
+
++ Response 200 (application/json)
+
+    {
+        "id": 2,
+        "url": "/api/genre/2",
+        "name": "Thriller",
+    }
+
++ Response 422 (application/json)
+
+    {
+        "name": [
+            "The name field is required"
+        ]
+    }
+
+
+### Delete a Genre [DELETE]
+
++ Response 204
