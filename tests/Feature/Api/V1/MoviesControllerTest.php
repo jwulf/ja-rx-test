@@ -142,4 +142,19 @@ class MoviesControllerTest extends TestCase
                 'name' => $movie->name,
             ]);
     }
+
+    /**
+     * Test it deletes a movie
+     *
+     * @return void
+     */
+    public function testItDeletesAMovie()
+    {
+        $movie = factory(movie::class)->create();
+
+        $this->delete('/api/movies/' . $movie->id)
+            ->assertstatus(204);
+
+        $this->assertDatabaseMissing('movies', ['id' => $movie->id]);
+    }
 }

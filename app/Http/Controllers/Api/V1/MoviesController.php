@@ -69,6 +69,8 @@ class MoviesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Movie::destroy($id);
+
+        return response('', 204);
     }
 }
