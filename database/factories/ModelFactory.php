@@ -31,3 +31,14 @@ $factory->define(App\Movie::class, function (Faker\Generator $faker) {
         'description' => $faker->optional()->paragraph(3),
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Actor::class, function (Faker\Generator $faker) {
+    return [
+        'first_name'  => $faker->firstName(),
+        'middle_name' => $faker->optional()->firstName(),
+        'last_name'   => $faker->lastName,
+        'dob'         => $faker->optional()->date($format = 'Y-m-d', $max = 'now'),
+        'biography'   => $faker->optional()->paragraph(3),
+    ];
+});
