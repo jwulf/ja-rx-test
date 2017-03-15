@@ -4,6 +4,7 @@ namespace Tests\Feature\Api\V1;
 
 use App\User;
 use App\Actor;
+use Carbon\Carbon;
 use Tests\TestCase;
 use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -150,6 +151,24 @@ class ActorsControllerTest extends TestCase
             ->assertstatus(200)
             ->assertJsonFragment([
                 'first_name' => $actor->first_name,
+            ]);
+    }
+
+    /**
+     * Test it appends the age to the actor details
+     *
+     * @return void
+     */
+    public function testItAppendsAgeToTheActorDetails()
+    {
+        $actor = factory(actor::class)->create([
+            'dob' => Carbon::now()->subYears(30)
+        ]);
+
+        $this->get('/api/actors/' . $actor->id)
+            ->assertstatus(200)
+            ->assertJsonFragment([
+                'age' => 30,
             ]);
     }
 
