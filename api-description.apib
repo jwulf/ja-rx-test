@@ -107,3 +107,125 @@ Resources related to movies.
 ### Delete a Movie [DELETE]
 
 + Response 204
+
+# Group Actors
+
+Resources related to actors.
+
+## Actors Collection [/api/actors]
+
+### List All Actors [GET]
+
++ Response 200 (application/json)
+
+    [
+        {
+            "id": 1,
+            "url": "/api/actors/1",
+            "first_name": "Daniel",
+            "middle_name": "Wroughton",
+            "last_name": "Craig",
+            "dob": "1968-03-02",
+            "age": 49,
+            "biography": "Daniel Wroughton Craig is an English actor. He trained at the National Youth Theatre and graduated from the Guildhall School of Music and Drama in 1991, before beginning his career on stage. His film debut was in the drama The Power of One."
+        }
+    ]
+
+### Create a New Actor [POST]
+
++ first_name (string) - The actors first name
++ middle_name (string) - The actors middle name
++ last_name (string) - The actors last name
++ dob (date) - The date of birth of the actor
++ biography (string) - A biography of the actor
+
++ Request (application/json)
+
+    {
+        "first_name": "Mads",
+        "middle_name": "Dittmann",
+        "last_name": "Mikkelsen",
+        "dob": "1965-11-22",
+        "biography": "Mads Dittmann Mikkelsen is a Danish actor. Originally a gymnast and dancer, he began his career as an actor in 1996."
+    }
+
++ Response 201 (application/json)
+
+    {
+        "id": 2,
+        "url": "/api/actors/2",
+        "first_name": "Mads",
+        "middle_name": "Dittmann",
+        "last_name": "Mikkelsen",
+        "dob": "1965-11-22",
+        "age": 51,
+        "biography": "Mads Dittmann Mikkelsen is a Danish actor. Originally a gymnast and dancer, he began his career as an actor in 1996."
+    }
+
++ Response 422 (application/json)
+
+    {
+        "first_name": [
+            "The first name field is required"
+        ]
+    }
+
+## Actor [/api/actors/{actor_id}]
+
++ Parameters
+    + actor_id (number) - ID of the Actor in the form of an integer
+
+### View an Actor [GET]
+
++ Response 200 (application/json)
+
+    {
+        "id": 2,
+        "url": "/api/actors/2",
+        "first_name": "Mads",
+        "middle_name": "Dittmann",
+        "last_name": "Mikkelsen",
+        "dob": "1965-11-22",
+        "age": 51,
+        "biography": "Mads Dittmann Mikkelsen is a Danish actor. Originally a gymnast and dancer, he began his career as an actor in 1996."
+    }
+
+### Update an Actor [PUT]
+
++ first_name (string) - The actors first name
++ middle_name (string) - The actors middle name
++ last_name (string) - The actors last name
++ dob (date) - The date of birth of the actor
++ biography (string) - A biography of the actor
+
++ Request (application/json)
+
+    {
+        "biography": "Mads was awesome in Hannibal.",
+    }
+
++ Response 200 (application/json)
+
+    {
+        "id": 2,
+        "url": "/api/actors/2",
+        "first_name": "Mads",
+        "middle_name": "Dittmann",
+        "last_name": "Mikkelsen",
+        "dob": "1965-11-22",
+        "age": 51,
+        "biography": "Mads was awesome in Hannibal."
+    }
+
++ Response 422 (application/json)
+
+    {
+        "first_name": [
+            "The first_name field is required"
+        ]
+    }
+
+
+### Delete an Actor [DELETE]
+
++ Response 204

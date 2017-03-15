@@ -19,4 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('test', 'TestController@index');
 
+Route::resource('actors', 'ActorsController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+
 Route::resource('movies', 'MoviesController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
