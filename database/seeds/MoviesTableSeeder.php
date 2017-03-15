@@ -1,5 +1,8 @@
 <?php
 
+use App\Actor;
+use App\Movie;
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
 class MoviesTableSeeder extends Seeder
@@ -11,6 +14,14 @@ class MoviesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Movie::class, 50)->create();
+        $actors = Actor::all();
+
+        $faker = Faker::create();
+
+        factory(Movie::class, 50)->create()->each(function ($movie) use ($actors, $faker) {
+            foreach ($actors->random(rand(5, 10)) as $randomActor) {
+                $movie->actors()->attach($randomActor->id, ['character' => $faker->name]);
+            }
+        });
     }
 }
