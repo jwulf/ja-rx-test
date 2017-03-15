@@ -108,4 +108,22 @@ class MoviesControllerTest extends TestCase
             ['name' => 'Some other name']
         );
     }
+
+    /**
+     * Test it prevents updating a movie with no name
+     *
+     * @return void
+     */
+    public function testItPreventsUpdatingAMovieWithNoName()
+    {
+        $movie = factory(Movie::class)->create();
+
+        $response = $this->json(
+            'PUT',
+            '/api/movies/' . $movie->id,
+            ['name' => '']
+        );
+
+        $response->assertStatus(422);
+    }
 }

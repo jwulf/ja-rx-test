@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Movie;
 use Illuminate\Http\Request;
+use App\Http\Requests\MovieRequest;
 use App\Http\Controllers\Controller;
 
 class MoviesController extends Controller
@@ -21,17 +22,11 @@ class MoviesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  MovieRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MovieRequest $request)
     {
-        $this->validate($request, [
-            'name'        => 'required|string',
-            'rating'      => 'integer|nullable',
-            'description' => 'string|nullable',
-        ]);
-
         $movie = Movie::create($request->all());
 
         return response()->json($movie, 201);
@@ -51,11 +46,11 @@ class MoviesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  MovieRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MovieRequest $request, $id)
     {
         $movie = Movie::findOrFail($id);
 
