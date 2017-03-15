@@ -21,4 +21,6 @@ Route::get('test', 'TestController@index');
 
 Route::resource('actors', 'ActorsController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 
+Route::resource('genres', 'GenresController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+
 Route::resource('movies', 'MoviesController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);

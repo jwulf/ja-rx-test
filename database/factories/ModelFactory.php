@@ -42,3 +42,10 @@ $factory->define(App\Actor::class, function (Faker\Generator $faker) {
         'biography'   => $faker->optional()->paragraph(3),
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Genre::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word(),
+    ];
+});
