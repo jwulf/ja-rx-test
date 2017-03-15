@@ -81,4 +81,31 @@ class MoviesControllerTest extends TestCase
         $response = $this->json('POST', '/api/movies', ['name' => ''])
             ->assertStatus(422);
     }
+
+    /**
+     * Test it allows updating of a movie
+     *
+     * @return void
+     */
+    public function testItAllowsUpdatingOfAMovie()
+    {
+        $movie = factory(Movie::class)->create();
+
+        $response = $this->json(
+            'PUT',
+            '/api/movies/' . $movie->id,
+            ['name' => 'Some other name']
+        );
+
+        $response
+            ->assertStatus(200)
+            ->assertJsonFragment([
+                'name' => 'Some other name',
+            ]);
+
+        $this->assertDatabaseHas(
+            'movies',
+            ['name' => 'Some other name']
+        );
+    }
 }
