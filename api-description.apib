@@ -16,10 +16,94 @@ Resources related to movies.
 
     [
         {
-            "id": "1",
+            "id": 1,
             "url": "/api/movies/1",
             "name": "Fight Club",
             "rating": 79,
             "description": "Fight Club is a 1999 American film based on the 1996 novel of the same name by Chuck Palahniuk. The film was directed by David Fincher, and stars Brad Pitt, Edward Norton and Helena Bonham Carter."
         }
     ]
+
+### Create a New Movie [POST]
+
++ name (string) - The name of the movie
++ rating (integer) - The rating of the movie
++ description (string) - A description of the movie
+
++ Request (application/json)
+
+    {
+        "name": "Lock, Stock and Two Smoking Barrels",
+        "rating": 76,
+        "description": "Lock, Stock and Two Smoking Barrels is a 1998 British crime comedy film written and directed by Guy Ritchie, produced by Matthew Vaughn and starring an ensemble cast featuring Jason Flemyng, Dexter Fletcher, Nick Moran, Jason Statham, Steven Mackintosh, Vinnie Jones, and Sting.",
+    }
+
++ Response 201 (application/json)
+
+    {
+        "id": 2,
+        "url": "/api/movies/2",
+        "name": "Lock, Stock and Two Smoking Barrels",
+        "rating": 76,
+        "description": "Lock, Stock and Two Smoking Barrels is a 1998 British crime comedy film written and directed by Guy Ritchie, produced by Matthew Vaughn and starring an ensemble cast featuring Jason Flemyng, Dexter Fletcher, Nick Moran, Jason Statham, Steven Mackintosh, Vinnie Jones, and Sting.",
+    }
+
++ Response 422 (application/json)
+
+    {
+        "name": [
+            "The name field is required"
+        ]
+    }
+
+## Movie [/api/movies/{movie_id}]
+
++ Parameters
+    + movie_id (number) - ID of the Movie in the form of an integer
+
+### View a Movie [GET]
+
++ Response 200 (application/json)
+
+    {
+        "id": 2,
+        "url": "/api/movies/2",
+        "name": "Lock, Stock and Two Smoking Barrels",
+        "rating": 76,
+        "description": "Lock, Stock and Two Smoking Barrels is a 1998 British crime comedy film written and directed by Guy Ritchie, produced by Matthew Vaughn and starring an ensemble cast featuring Jason Flemyng, Dexter Fletcher, Nick Moran, Jason Statham, Steven Mackintosh, Vinnie Jones, and Sting.",
+    }
+
+### Update a Movie [PUT]
+
++ name (string) - The name of the movie
++ rating (integer) - The rating of the movie
++ description (string) - A description of the movie
+
++ Request (application/json)
+
+    {
+        "rating": 100,
+    }
+
++ Response 200 (application/json)
+
+    {
+        "id": 2,
+        "url": "/api/movies/2",
+        "name": "Lock, Stock and Two Smoking Barrels",
+        "rating": 100,
+        "description": "Lock, Stock and Two Smoking Barrels is a 1998 British crime comedy film written and directed by Guy Ritchie, produced by Matthew Vaughn and starring an ensemble cast featuring Jason Flemyng, Dexter Fletcher, Nick Moran, Jason Statham, Steven Mackintosh, Vinnie Jones, and Sting.",
+    }
+
++ Response 422 (application/json)
+
+    {
+        "name": [
+            "The name field is required"
+        ]
+    }
+
+
+### Delete a Movie [DELETE]
+
++ Response 204
