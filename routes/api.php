@@ -24,3 +24,4 @@ Route::resource('actors', 'ActorsController', ['only' => ['index', 'store', 'sho
 Route::resource('genres', 'GenresController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 
 Route::resource('movies', 'MoviesController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+Route::resource('movies.actors', 'MovieActorsController', ['only' => ['index', 'store', 'destroy']]);
