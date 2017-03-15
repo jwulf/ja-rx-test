@@ -70,6 +70,11 @@ Accepts: application/json
 Content-Type: application/json
 ```
 
+## Usage
+
+See [api-description.apib](api-description.apib) for an API Blueprint describing
+the available resources.
+
 ## Testing
 
 To run the test suite for the application, execute:
