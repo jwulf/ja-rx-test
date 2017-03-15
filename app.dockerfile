@@ -36,6 +36,8 @@ RUN chown -R app:app .
 
 RUN su app -c "composer install --no-progress"
 
-# Update permissions for serving
+# Update permissions for serving. Make storage and cache files group writeable
 
-RUN chown -R www-data:www-data storage bootstrap/cache
+RUN chown -R www-data:www-data storage bootstrap/cache && \
+    find storage bootstrap/cache -type d -exec chmod 775 {} \; && \
+    find storage bootstrap/cache -type f -exec chmod 664 {} \;
