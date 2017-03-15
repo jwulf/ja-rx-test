@@ -43,4 +43,31 @@ class MoviesControllerTest extends TestCase
                 'name' => $movie->name,
             ]);
     }
+
+    /**
+     * Test it allows the creation of a movie
+     *
+     * @return void
+     */
+    public function testItAllowsCreationOfAMovie()
+    {
+        $movie = factory(Movie::class)->make();
+
+        $response = $this->json(
+            'POST',
+            '/api/movies',
+            ['name' => $movie->name, 'rating' => $movie->rating, 'description' => $movie->description]
+        );
+
+        $response
+            ->assertStatus(201)
+            ->assertJsonFragment([
+                'name' => $movie->name
+            ]);
+
+        $this->assertDatabaseHas(
+            'movies',
+            ['name' => $movie->name]
+        );
+    }
 }
