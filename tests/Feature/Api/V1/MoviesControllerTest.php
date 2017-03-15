@@ -126,4 +126,20 @@ class MoviesControllerTest extends TestCase
 
         $response->assertStatus(422);
     }
+
+    /**
+     * Test it shows movie details
+     *
+     * @return void
+     */
+    public function testItShowsMovieDetails()
+    {
+        $movie = factory(movie::class)->create();
+
+        $this->get('/api/movies/' . $movie->id)
+            ->assertstatus(200)
+            ->assertJsonFragment([
+                'name' => $movie->name,
+            ]);
+    }
 }

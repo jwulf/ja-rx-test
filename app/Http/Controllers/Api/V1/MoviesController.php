@@ -40,7 +40,9 @@ class MoviesController extends Controller
      */
     public function show($id)
     {
-        //
+        $movie = Movie::findOrFail($id);
+
+        return response()->json($movie, 200);
     }
 
     /**
