@@ -32,7 +32,7 @@ services:
             - app
     migrate:
         image: jessarcher/movies
-        command: php artisan migrate
+        command: php artisan migrate --seed
         depends_on:
             - db
             - app

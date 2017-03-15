@@ -10,7 +10,8 @@ A simple Laravel API app for managing movies, genres, and actors.
 ## Installation
 
 To set up the environment using Docker Compose, simply run the following command
-to download and build php-fpm, nginx, and postgres containers.
+to download and build php-fpm, nginx, and postgres containers as well as run
+migrations and database seeders.
 
 ```sh
 docker-compose up
