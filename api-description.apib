@@ -12,17 +12,22 @@ Resources related to movies.
 
 ### List All Movies [GET]
 
++ Request
+
+    + Headers
+
+            Accept: application/json
+
 + Response 200 (application/json)
 
-    [
-        {
-            "id": 1,
-            "url": "/api/movies/1",
-            "name": "Fight Club",
-            "rating": 79,
-            "description": "Fight Club is a 1999 American film based on the 1996 novel of the same name by Chuck Palahniuk. The film was directed by David Fincher, and stars Brad Pitt, Edward Norton and Helena Bonham Carter."
-        }
-    ]
+        [
+            {
+                "id": 1,
+                "name": "Fight Club",
+                "rating": 79,
+                "description": "Fight Club is a 1999 American film based on the 1996 novel of the same name by Chuck Palahniuk. The film was directed by David Fincher, and stars Brad Pitt, Edward Norton and Helena Bonham Carter."
+            }
+        ]
 
 ### Create a New Movie [POST]
 
@@ -32,46 +37,56 @@ Resources related to movies.
 
 + Request (application/json)
 
-    {
-        "name": "Lock, Stock and Two Smoking Barrels",
-        "rating": 76,
-        "description": "Lock, Stock and Two Smoking Barrels is a 1998 British crime comedy film written and directed by Guy Ritchie, produced by Matthew Vaughn and starring an ensemble cast featuring Jason Flemyng, Dexter Fletcher, Nick Moran, Jason Statham, Steven Mackintosh, Vinnie Jones, and Sting.",
-    }
+    + Headers
+
+            Accept: application/json
+
+    + Body
+
+            {
+                "name": "Lock, Stock and Two Smoking Barrels",
+                "rating": 76,
+                "description": "Lock, Stock and Two Smoking Barrels is a 1998 British crime comedy film written and directed by Guy Ritchie, produced by Matthew Vaughn and starring an ensemble cast featuring Jason Flemyng, Dexter Fletcher, Nick Moran, Jason Statham, Steven Mackintosh, Vinnie Jones, and Sting."
+            }
 
 + Response 201 (application/json)
 
-    {
-        "id": 2,
-        "url": "/api/movies/2",
-        "name": "Lock, Stock and Two Smoking Barrels",
-        "rating": 76,
-        "description": "Lock, Stock and Two Smoking Barrels is a 1998 British crime comedy film written and directed by Guy Ritchie, produced by Matthew Vaughn and starring an ensemble cast featuring Jason Flemyng, Dexter Fletcher, Nick Moran, Jason Statham, Steven Mackintosh, Vinnie Jones, and Sting.",
-    }
+        {
+            "id": 2,
+            "name": "Lock, Stock and Two Smoking Barrels",
+            "rating": 76,
+            "description": "Lock, Stock and Two Smoking Barrels is a 1998 British crime comedy film written and directed by Guy Ritchie, produced by Matthew Vaughn and starring an ensemble cast featuring Jason Flemyng, Dexter Fletcher, Nick Moran, Jason Statham, Steven Mackintosh, Vinnie Jones, and Sting."
+        }
 
 + Response 422 (application/json)
 
-    {
-        "name": [
-            "The name field is required"
-        ]
-    }
+        {
+            "name": [
+                "The name field is required"
+            ]
+        }
 
 ## Movie [/api/movies/{movie_id}]
 
 + Parameters
-    + movie_id (number) - ID of the Movie in the form of an integer
+    + movie_id: 1 (number) - ID of the Movie in the form of an integer
 
 ### View a Movie [GET]
 
++ Request
+
+    + Headers
+
+            Accept: application/json
+
 + Response 200 (application/json)
 
-    {
-        "id": 2,
-        "url": "/api/movies/2",
-        "name": "Lock, Stock and Two Smoking Barrels",
-        "rating": 76,
-        "description": "Lock, Stock and Two Smoking Barrels is a 1998 British crime comedy film written and directed by Guy Ritchie, produced by Matthew Vaughn and starring an ensemble cast featuring Jason Flemyng, Dexter Fletcher, Nick Moran, Jason Statham, Steven Mackintosh, Vinnie Jones, and Sting.",
-    }
+        {
+            "id": 2,
+            "name": "Lock, Stock and Two Smoking Barrels",
+            "rating": 76,
+            "description": "Lock, Stock and Two Smoking Barrels is a 1998 British crime comedy film written and directed by Guy Ritchie, produced by Matthew Vaughn and starring an ensemble cast featuring Jason Flemyng, Dexter Fletcher, Nick Moran, Jason Statham, Steven Mackintosh, Vinnie Jones, and Sting."
+        }
 
 ### Update a Movie [PUT]
 
@@ -81,30 +96,40 @@ Resources related to movies.
 
 + Request (application/json)
 
-    {
-        "rating": 100,
-    }
+    + Headers
+
+            Accept: application/json
+
+    + Body
+
+            {
+                "name": "Lock, Stock and Three Smoking Barrels"
+            }
 
 + Response 200 (application/json)
 
-    {
-        "id": 2,
-        "url": "/api/movies/2",
-        "name": "Lock, Stock and Two Smoking Barrels",
-        "rating": 100,
-        "description": "Lock, Stock and Two Smoking Barrels is a 1998 British crime comedy film written and directed by Guy Ritchie, produced by Matthew Vaughn and starring an ensemble cast featuring Jason Flemyng, Dexter Fletcher, Nick Moran, Jason Statham, Steven Mackintosh, Vinnie Jones, and Sting.",
-    }
+        {
+            "id": 2,
+            "name": "Lock, Stock and Two Smoking Barrels",
+            "rating": 100,
+            "description": "Lock, Stock and Two Smoking Barrels is a 1998 British crime comedy film written and directed by Guy Ritchie, produced by Matthew Vaughn and starring an ensemble cast featuring Jason Flemyng, Dexter Fletcher, Nick Moran, Jason Statham, Steven Mackintosh, Vinnie Jones, and Sting."
+        }
 
 + Response 422 (application/json)
 
-    {
-        "name": [
-            "The name field is required"
-        ]
-    }
-
+        {
+            "name": [
+                "The name field is required"
+            ]
+        }
 
 ### Delete a Movie [DELETE]
+
++ Request
+
+    + Headers
+
+            Accept: application/json
 
 + Response 204
 
@@ -115,29 +140,34 @@ Resources related to actors associated with movies
 ## Movie Actor Collection [/api/movies/{movie_id}/actors]
 
 + Parameters
-    + movie_id (number) - ID of the Movie in the form of an integer
+    + movie_id: 2 (number) - ID of the Movie in the form of an integer
 
 ### List Actors associated with a Movie [GET]
 
++ Request
+
+    + Headers
+
+            Accept: application/json
+
 + Response 200 (application/json)
 
-    [
-        {
-            "id": 1,
-            "url": "/api/actors/1",
-            "first_name": "Daniel",
-            "middle_name": "Wroughton",
-            "last_name": "Craig",
-            "dob": "1968-03-02",
-            "age": 49,
-            "biography": "Daniel Wroughton Craig is an English actor. He trained at the National Youth Theatre and graduated from the Guildhall School of Music and Drama in 1991, before beginning his career on stage. His film debut was in the drama The Power of One."
-            "pivot": {
-                "movie_id": 1008,
-                "actor_id": 1692,
-                "character": "James Bond"
+        [
+            {
+                "id": 1,
+                "first_name": "Daniel",
+                "middle_name": "Wroughton",
+                "last_name": "Craig",
+                "dob": "1968-03-02",
+                "age": 49,
+                "biography": "Daniel Wroughton Craig is an English actor. He trained at the National Youth Theatre and graduated from the Guildhall School of Music and Drama in 1991, before beginning his career on stage. His film debut was in the drama The Power of One.",
+                "pivot": {
+                    "movie_id": 1008,
+                    "actor_id": 1692,
+                    "character": "James Bond"
+                }
             }
-        }
-    ]
+        ]
 
 ### Associate Actor with a Movie [POST]
 
@@ -146,38 +176,50 @@ Resources related to actors associated with movies
 
 + Request (application/json)
 
-    {
-        "actor_id": 2,
-        "character": "Le Chiffre"
-    }
+    + Headers
+
+            Accept: application/json
+
+    + Body
+
+            {
+                "actor_id": 5,
+                "character": "Le Chiffre"
+            }
 
 + Response 201 (application/json)
 
-    {
-        "movie_id": 3,
-        "actor_id": 2
-        "character": "Le Chiffre"
-    }
+        {
+            "movie_id": 3,
+            "actor_id": 5,
+            "character": "Le Chiffre"
+        }
 
 + Response 422 (application/json)
 
-    {
-        "character": [
-            "The character field is required"
-        ]
-    }
+        {
+            "character": [
+                "The character field is required"
+            ]
+        }
 
 + Response 409 (application/json)
 
-    "Actor already assigned to movie"
+        "Actor already assigned to movie"
 
 ## Movie Actor [/api/movies/{movie_id}/actors/{actor_id}]
 
 + Parameters
-    + movie_id (number) - ID of the Movie in the form of an integer
-    + actor_id (number) - ID of the Actor in the form of an integer
+    + movie_id: 2 (number) - ID of the Movie in the form of an integer
+    + actor_id: 1 (number) - ID of the Actor in the form of an integer
 
 ### Un-associate an Actor with a Movie [DELETE]
+
++ Request
+
+    + Headers
+
+            Accept: application/json
 
 + Response 204
 
@@ -189,20 +231,25 @@ Resources related to actors.
 
 ### List All Actors [GET]
 
++ Request
+
+    + Headers
+
+            Accept: application/json
+
 + Response 200 (application/json)
 
-    [
-        {
-            "id": 1,
-            "url": "/api/actors/1",
-            "first_name": "Daniel",
-            "middle_name": "Wroughton",
-            "last_name": "Craig",
-            "dob": "1968-03-02",
-            "age": 49,
-            "biography": "Daniel Wroughton Craig is an English actor. He trained at the National Youth Theatre and graduated from the Guildhall School of Music and Drama in 1991, before beginning his career on stage. His film debut was in the drama The Power of One."
-        }
-    ]
+        [
+            {
+                "id": 1,
+                "first_name": "Daniel",
+                "middle_name": "Wroughton",
+                "last_name": "Craig",
+                "dob": "1968-03-02",
+                "age": 49,
+                "biography": "Daniel Wroughton Craig is an English actor. He trained at the National Youth Theatre and graduated from the Guildhall School of Music and Drama in 1991, before beginning his career on stage. His film debut was in the drama The Power of One."
+            }
+        ]
 
 ### Create a New Actor [POST]
 
@@ -214,54 +261,64 @@ Resources related to actors.
 
 + Request (application/json)
 
-    {
-        "first_name": "Mads",
-        "middle_name": "Dittmann",
-        "last_name": "Mikkelsen",
-        "dob": "1965-11-22",
-        "biography": "Mads Dittmann Mikkelsen is a Danish actor. Originally a gymnast and dancer, he began his career as an actor in 1996."
-    }
+    + Headers
+
+            Accept: application/json
+
+    + Body
+
+            {
+                "first_name": "Mads",
+                "middle_name": "Dittmann",
+                "last_name": "Mikkelsen",
+                "dob": "1965-11-22",
+                "biography": "Mads Dittmann Mikkelsen is a Danish actor. Originally a gymnast and dancer, he began his career as an actor in 1996."
+            }
 
 + Response 201 (application/json)
 
-    {
-        "id": 2,
-        "url": "/api/actors/2",
-        "first_name": "Mads",
-        "middle_name": "Dittmann",
-        "last_name": "Mikkelsen",
-        "dob": "1965-11-22",
-        "age": 51,
-        "biography": "Mads Dittmann Mikkelsen is a Danish actor. Originally a gymnast and dancer, he began his career as an actor in 1996."
-    }
+        {
+            "id": 2,
+            "first_name": "Mads",
+            "middle_name": "Dittmann",
+            "last_name": "Mikkelsen",
+            "dob": "1965-11-22",
+            "age": 51,
+            "biography": "Mads Dittmann Mikkelsen is a Danish actor. Originally a gymnast and dancer, he began his career as an actor in 1996."
+        }
 
 + Response 422 (application/json)
 
-    {
-        "first_name": [
-            "The first name field is required"
-        ]
-    }
+        {
+            "first_name": [
+                "The first name field is required"
+            ]
+        }
 
 ## Actor [/api/actors/{actor_id}]
 
 + Parameters
-    + actor_id (number) - ID of the Actor in the form of an integer
+    + actor_id: 1 (number) - ID of the Actor in the form of an integer
 
 ### View an Actor [GET]
 
++ Request
+
+    + Headers
+
+            Accept: application/json
+
 + Response 200 (application/json)
 
-    {
-        "id": 2,
-        "url": "/api/actors/2",
-        "first_name": "Mads",
-        "middle_name": "Dittmann",
-        "last_name": "Mikkelsen",
-        "dob": "1965-11-22",
-        "age": 51,
-        "biography": "Mads Dittmann Mikkelsen is a Danish actor. Originally a gymnast and dancer, he began his career as an actor in 1996."
-    }
+        {
+            "id": 2,
+            "first_name": "Mads",
+            "middle_name": "Dittmann",
+            "last_name": "Mikkelsen",
+            "dob": "1965-11-22",
+            "age": 51,
+            "biography": "Mads Dittmann Mikkelsen is a Danish actor. Originally a gymnast and dancer, he began his career as an actor in 1996."
+        }
 
 ### Update an Actor [PUT]
 
@@ -273,33 +330,46 @@ Resources related to actors.
 
 + Request (application/json)
 
-    {
-        "biography": "Mads was awesome in Hannibal.",
-    }
+    + Headers
+
+            Accept: application/json
+
+    + Body
+
+            {
+                "first_name": "Mads",
+                "last_name": "Mikkelsen",
+                "biography": "Mads was awesome in Hannibal."
+            }
 
 + Response 200 (application/json)
 
-    {
-        "id": 2,
-        "url": "/api/actors/2",
-        "first_name": "Mads",
-        "middle_name": "Dittmann",
-        "last_name": "Mikkelsen",
-        "dob": "1965-11-22",
-        "age": 51,
-        "biography": "Mads was awesome in Hannibal."
-    }
+        {
+            "id": 2,
+            "first_name": "Mads",
+            "middle_name": "Dittmann",
+            "last_name": "Mikkelsen",
+            "dob": "1965-11-22",
+            "age": 51,
+            "biography": "Mads was awesome in Hannibal."
+        }
 
 + Response 422 (application/json)
 
-    {
-        "first_name": [
-            "The first_name field is required"
-        ]
-    }
+        {
+            "first_name": [
+                "The first_name field is required"
+            ]
+        }
 
 
 ### Delete an Actor [DELETE]
+
++ Request
+
+    + Headers
+
+            Accept: application/json
 
 + Response 204
 
@@ -311,15 +381,20 @@ Resources related to genres.
 
 ### List All Genres [GET]
 
++ Request
+
+    + Headers
+
+            Accept: application/json
+
 + Response 200 (application/json)
 
-    [
-        {
-            "id": 1,
-            "url": "/api/genre/1",
-            "name": "Action",
-        }
-    ]
+        [
+            {
+                "id": 1,
+                "name": "Action"
+            }
+        ]
 
 ### Create a New Genre [POST]
 
@@ -327,40 +402,50 @@ Resources related to genres.
 
 + Request (application/json)
 
-    {
-        "name": "Comedy",
-    }
+    + Headers
+
+            Accept: application/json
+
+    + Body
+
+            {
+                "name": "Comedy"
+            }
 
 + Response 201 (application/json)
 
-    {
-        "id": 2,
-        "url": "/api/genres/2",
-        "name": "Comedy",
-    }
+        {
+            "id": 2,
+            "name": "Comedy"
+        }
 
 + Response 422 (application/json)
 
-    {
-        "name": [
-            "The name field is required"
-        ]
-    }
+        {
+            "name": [
+                "The name field is required"
+            ]
+        }
 
-## Genre [/api/genre/{genre_id}]
+## Genre [/api/genres/{genre_id}]
 
 + Parameters
-    + genre_id (number) - ID of the Genre in the form of an integer
+    + genre_id: 1 (number) - ID of the Genre in the form of an integer
 
 ### View a Genre [GET]
 
++ Request
+
+    + Headers
+
+            Accept: application/json
+
 + Response 200 (application/json)
 
-    {
-        "id": 2,
-        "url": "/api/genres/2",
-        "name": "Comedy",
-    }
+        {
+            "id": 2,
+            "name": "Comedy"
+        }
 
 ### Update a Genre [PUT]
 
@@ -368,27 +453,37 @@ Resources related to genres.
 
 + Request (application/json)
 
-    {
-        "name": "Thriller",
-    }
+    + Headers
+
+            Accept: application/json
+
+    + Body
+
+            {
+                "name": "Thriller"
+            }
 
 + Response 200 (application/json)
 
-    {
-        "id": 2,
-        "url": "/api/genre/2",
-        "name": "Thriller",
-    }
+        {
+            "id": 2,
+            "name": "Thriller"
+        }
 
 + Response 422 (application/json)
 
-    {
-        "name": [
-            "The name field is required"
-        ]
-    }
-
+        {
+            "name": [
+                "The name field is required"
+            ]
+        }
 
 ### Delete a Genre [DELETE]
+
++ Request
+
+    + Headers
+
+            Accept: application/json
 
 + Response 204

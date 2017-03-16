@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use DB;
 use App\Actor;
 use Illuminate\Http\Request;
 use App\Http\Requests\ActorRequest;
@@ -69,7 +70,12 @@ class ActorsController extends Controller
      */
     public function destroy($id)
     {
-        Actor::destroy($id);
+        $actor = Actor::findOrFail($id);
+
+        DB::transaction(function () use ($actor) {
+            $actor->movies()->detach();
+            $actor->delete();
+        });
 
         return response('', 204);
     }

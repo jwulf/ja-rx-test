@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use DB;
 use App\Genre;
+use App\Movie;
 use Illuminate\Http\Request;
 use App\Http\Requests\GenreRequest;
 use App\Http\Controllers\Controller;
@@ -69,7 +71,10 @@ class GenresController extends Controller
      */
     public function destroy($id)
     {
-        Genre::destroy($id);
+        DB::transaction(function () use ($id) {
+            Movie::where('genre_id', $id)->update(['genre_id' => null]);
+            Genre::destroy($id);
+        });
 
         return response('', 204);
     }

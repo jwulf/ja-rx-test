@@ -4,7 +4,11 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -44,7 +48,52 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($request->expectsJson() && ! $exception instanceof ValidationException) {
+            $exception = $this->prepareException($exception);
+
+            $status = $this->isHttpException($exception) ? $exception->getStatusCode() : 500;
+
+            $response = [
+                'error' => [
+                    'message' => $exception->getMessage() ?: 'An unknown error occurred',
+                ]
+            ];
+
+            if (config('app.debug')) {
+                $response['error']['exception'] = get_class($exception);
+                $response['error']['trace'] = $exception->getTrace();
+                if ($exception->getPrevious()) {
+                    $response['error']['previous'] = [
+                        'message' => $exception->getPrevious()->getMessage(),
+                        'exception' => get_class($exception->getPrevious()),
+                        'trace' => $exception->getPrevious()->getTrace(),
+                    ];
+                }
+            }
+
+            return response()->json($response, $status);
+        }
+
         return parent::render($request, $exception);
+    }
+
+    /**
+     * Prepare exception for rendering.
+     *
+     * @param  \Exception  $exception
+     * @return \Exception
+     */
+    protected function prepareException(Exception $exception)
+    {
+        if ($exception instanceof ModelNotFoundException) {
+            $exception = new NotFoundHttpException($exception->getMessage(), $exception);
+        } elseif ($exception instanceof AuthenticationException) {
+            $exception = new HttpException(401, $exception->getMessage());
+        } elseif ($exception instanceof NotFoundHttpException && empty($exception->getMessage())) {
+            $exception = new NotFoundHttpException('Not found', $exception);
+        }
+
+        return $exception;
     }
 
     /**
