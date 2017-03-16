@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use DB;
 use App\Movie;
 use Illuminate\Http\Request;
 use App\Http\Requests\MovieRequest;
@@ -69,7 +70,12 @@ class MoviesController extends Controller
      */
     public function destroy($id)
     {
-        Movie::destroy($id);
+        $movie = Movie::findOrFail($id);
+
+        DB::transaction(function () use ($movie) {
+            $movie->actors()->detach();
+            $movie->delete();
+        });
 
         return response('', 204);
     }
