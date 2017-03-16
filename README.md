@@ -82,3 +82,9 @@ To run the test suite for the application, execute:
 ```sh
 docker-compose exec app su app -c "php vendor/bin/phpunit"
 ```
+
+To test against the API Blueprint, execute:
+
+```sh
+dredd --header="Authorization:Bearer <Your Access Token>"
+```
