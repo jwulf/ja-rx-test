@@ -16,7 +16,7 @@ class GenresController extends Controller
      */
     public function index()
     {
-        return Genre::all();
+        return Genre::with('movies', 'movies.actors')->get();
     }
 
     /**

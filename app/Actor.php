@@ -50,4 +50,14 @@ class Actor extends Model
 
         return $this->dob->age;
     }
+
+    /**
+     * The movies this actor is associated with
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function movies()
+    {
+        return $this->belongsToMany('App\Movie')->withPivot('character');
+    }
 }

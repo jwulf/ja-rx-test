@@ -26,7 +26,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Movie::class, function (Faker\Generator $faker) {
     return [
-        'name'        => $faker->realText(50),
+        'name'        => $faker->sentence(6, true),
         'rating'      => $faker->optional()->numberBetween(0, 100),
         'description' => $faker->optional()->paragraph(3),
     ];

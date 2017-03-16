@@ -108,6 +108,79 @@ Resources related to movies.
 
 + Response 204
 
+# Group Movie Actors
+
+Resources related to actors associated with movies
+
+## Movie Actor Collection [/api/movies/{movie_id}/actors]
+
++ Parameters
+    + movie_id (number) - ID of the Movie in the form of an integer
+
+### List Actors associated with a Movie [GET]
+
++ Response 200 (application/json)
+
+    [
+        {
+            "id": 1,
+            "url": "/api/actors/1",
+            "first_name": "Daniel",
+            "middle_name": "Wroughton",
+            "last_name": "Craig",
+            "dob": "1968-03-02",
+            "age": 49,
+            "biography": "Daniel Wroughton Craig is an English actor. He trained at the National Youth Theatre and graduated from the Guildhall School of Music and Drama in 1991, before beginning his career on stage. His film debut was in the drama The Power of One."
+            "pivot": {
+                "movie_id": 1008,
+                "actor_id": 1692,
+                "character": "James Bond"
+            }
+        }
+    ]
+
+### Associate Actor with a Movie [POST]
+
++ actor_id (number) - The ID of the Actor in the form of an integer
++ character (string) - The name of the character that the actor played
+
++ Request (application/json)
+
+    {
+        "actor_id": 2,
+        "character": "Le Chiffre"
+    }
+
++ Response 201 (application/json)
+
+    {
+        "movie_id": 3,
+        "actor_id": 2
+        "character": "Le Chiffre"
+    }
+
++ Response 422 (application/json)
+
+    {
+        "character": [
+            "The character field is required"
+        ]
+    }
+
++ Response 409 (application/json)
+
+    "Actor already assigned to movie"
+
+## Movie Actor [/api/movies/{movie_id}/actors/{actor_id}]
+
++ Parameters
+    + movie_id (number) - ID of the Movie in the form of an integer
+    + actor_id (number) - ID of the Actor in the form of an integer
+
+### Un-associate an Actor with a Movie [DELETE]
+
++ Response 204
+
 # Group Actors
 
 Resources related to actors.
