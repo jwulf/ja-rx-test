@@ -30,7 +30,7 @@ class GenresTableSeeder extends Seeder
     public function run()
     {
         foreach ($this->genres as $genre) {
-            Genre::findOrCreate(['name' => $genre]);
+            Genre::firstOrCreate(['name' => $genre]);
         }
     }
 }
